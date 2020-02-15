@@ -2,7 +2,6 @@ defmodule NekoWeb.ChatController do
   use NekoWeb, :controller
 
   alias Neko.Api
-  alias Neko.Api.Chat
 
   action_fallback NekoWeb.FallbackController
 
@@ -15,11 +14,11 @@ defmodule NekoWeb.ChatController do
     chat_params = 
       %{"text" => conn.params["text"]}
     case Api.recv_chat(chat_params) do
-      {:ok, chat} -> 
+      {:ok, _chat} -> 
         chats = Api.list_chats()
         render(conn, "index.json", chats: chats)
 
-      {:error, %Ecto.Changeset{} = changeset} ->
+      {:error, %Ecto.Changeset{} = _changeset} ->
         send_resp(conn, 502, "Oops, failed sending!")
     end
   end

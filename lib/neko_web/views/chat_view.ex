@@ -3,11 +3,11 @@ defmodule NekoWeb.ChatView do
   alias NekoWeb.ChatView
 
   def render("index.json", %{chats: chats}) do
-    %{data: render_many(chats, ChatView, "chat.json")}
+    render_many(chats, ChatView, "chat.json")
   end
 
   def render("show.json", %{chat: chat}) do
-    %{data: render_one(chat, ChatView, "chat.json")}
+    render_one(chat, ChatView, "chat.json")
   end
 
   def render("chat.json", %{chat: chat}) do
@@ -15,5 +15,7 @@ defmodule NekoWeb.ChatView do
       # id: chat.id,
       text: chat.text
     }
+    # IO.inspect("chats=")
+    # IO.inspect(chat.text)
   end
 end

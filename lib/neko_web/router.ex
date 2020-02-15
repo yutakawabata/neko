@@ -11,13 +11,19 @@ defmodule NekoWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug CORSPlug, origin: "*"
+    # plug Neko.Router
   end
 
   scope "/", NekoWeb do
     pipe_through :api
     post "/recv", ChatController, :recv
+    options "/recv", ChatController, :options
+
     post "/show",  ChatController, :show
     get "/chatlog", ChatController, :chatlog
+    options "/chatlog", ChatController, :options # 追加
+    # options "/items/:id", ItemController, :options
 
     # get "/", PageController, :index
   end
